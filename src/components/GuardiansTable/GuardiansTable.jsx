@@ -21,8 +21,11 @@ function SortTh({ sortKey, current, onSort, align, children }) {
   );
 }
 
+const PAGE_SIZE = 5;
+
 export function GuardiansTable({ guardians, onSelect, filter, setFilter }) {
   const [sort, setSort] = useState({ key: 'score', dir: 'desc' });
+  const [page, setPage] = useState(1);
 
   const filtered = useMemo(() => {
     let list = guardians;
@@ -43,8 +46,18 @@ export function GuardiansTable({ guardians, onSelect, filter, setFilter }) {
     });
   }, [guardians, filter, sort]);
 
-  const toggleSort = (key) =>
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  const paginated = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+
+  const toggleSort = (key) => {
+    setPage(1);
     setSort(s => s.key === key ? { key, dir: s.dir === 'asc' ? 'desc' : 'asc' } : { key, dir: 'desc' });
+  };
+
+  const handleSetFilter = (newFilter) => {
+    setPage(1);
+    setFilter(newFilter);
+  };
 
   return (
     <div className="guardians-table" data-guardians-table="true">
@@ -58,7 +71,7 @@ export function GuardiansTable({ guardians, onSelect, filter, setFilter }) {
           <input
             className="gt-search__input"
             value={filter.query}
-            onChange={e => setFilter({ ...filter, query: e.target.value })}
+            onChange={e => handleSetFilter({ ...filter, query: e.target.value })}
             placeholder="Buscar responsável..."
           />
           <span className="gt-search__icon">⌕</span>
@@ -67,7 +80,7 @@ export function GuardiansTable({ guardians, onSelect, filter, setFilter }) {
         <select
           className="gt-select"
           value={filter.tier}
-          onChange={e => setFilter({ ...filter, tier: e.target.value })}
+          onChange={e => handleSetFilter({ ...filter, tier: e.target.value })}
         >
           <option value="todos">Todos os níveis</option>
           {TIERS.map(t => <option key={t.key} value={t.key}>{t.label}</option>)}
@@ -76,7 +89,7 @@ export function GuardiansTable({ guardians, onSelect, filter, setFilter }) {
         <select
           className="gt-select"
           value={filter.status}
-          onChange={e => setFilter({ ...filter, status: e.target.value })}
+          onChange={e => handleSetFilter({ ...filter, status: e.target.value })}
         >
           <option value="todos">Todos os status</option>
           <option value="em_dia">Em dia</option>
@@ -101,7 +114,7 @@ export function GuardiansTable({ guardians, onSelect, filter, setFilter }) {
             </tr>
           </thead>
           <tbody>
-            {filtered.map(g => {
+            {paginated.map(g => {
               const tier = getTier(g.score);
               return (
                 <tr key={g.id} className="gt-row" onClick={() => onSelect(g)}>
@@ -132,6 +145,29 @@ export function GuardiansTable({ guardians, onSelect, filter, setFilter }) {
           </tbody>
         </table>
       </div>
+
+      {/* pagination */}
+      {totalPages > 1 && (
+        <div className="gt-pagination">
+          <button
+            className="gt-page-btn"
+            onClick={() => setPage(p => p - 1)}
+            disabled={page === 1}
+          >
+            ‹
+          </button>
+          <span className="gt-page-info">
+            {page} de {totalPages}
+          </span>
+          <button
+            className="gt-page-btn"
+            onClick={() => setPage(p => p + 1)}
+            disabled={page === totalPages}
+          >
+            ›
+          </button>
+        </div>
+      )}
     </div>
   );
 }

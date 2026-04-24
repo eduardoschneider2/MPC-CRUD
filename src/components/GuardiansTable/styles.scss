@@ -125,6 +125,50 @@
   &--muted  { color: #8a83a0; }
 }
 
+/* ── pagination ─────────────────────────────────────── */
+.gt-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 12px 20px;
+  border-top: 1px solid #ece6f4;
+}
+
+.gt-page-btn {
+  width: 28px;
+  height: 28px;
+  border: 1px solid #ece6f4;
+  border-radius: 6px;
+  background: #faf7fc;
+  color: #1a1625;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.1s, border-color 0.1s;
+
+  &:hover:not(:disabled) {
+    background: #f0e8fa;
+    border-color: #8600c2;
+  }
+
+  &:disabled {
+    opacity: 0.35;
+    cursor: default;
+  }
+}
+
+.gt-page-info {
+  font-size: 12px;
+  font-family: var(--font-mono);
+  color: #6b6477;
+  min-width: 52px;
+  text-align: center;
+}
+
 /* ── guardian cell ──────────────────────────────────── */
 .gt-guardian {
   display: flex;

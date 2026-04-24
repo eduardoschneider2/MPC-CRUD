@@ -30,7 +30,8 @@ export function KPI({ label, value, sub, tone = 'default', onClick, trend, pulse
         <div className={`kpi__value kpi__value--${valueMod}`}>{value}</div>
         {trend !== undefined && (
           <div className={`kpi__trend kpi__trend--${trendMod}`}>
-            {trend >= 0 ? '↑' : '↓'}<a style={{fontSize: '13x'}}>{Math.abs(trend)}</a>
+            <a style={{fontSize: '20px'}}>{trend >= 0 ? '↑' : '↓'}</a>
+            <a style={{fontSize: '13x'}}>{Math.abs(trend)}</a>
           </div>
         )}
       </div>

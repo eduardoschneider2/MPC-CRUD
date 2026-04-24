@@ -49,16 +49,56 @@ function FinancialCell({ status, days }) {
 function buildSuggestions(g) {
   const list = [];
   if (g.engagement < 14)
-    list.push({ title: 'Convidar a abrir o app com mais frequência', desc: `Apenas ${g.engagement} acessos nos últimos 14 dias. Meta: 14+`, gain: '+8 pts', icon: '◉' });
+    list.push({ key: 'engagement', title: 'Convidar a abrir o app com mais frequência', desc: `Apenas ${g.engagement} acessos nos últimos 14 dias. Meta: 14+`, gain: '+8 pts', icon: '◉' });
   if (g.readRate < 80)
-    list.push({ title: 'Enviar lembrete de comunicados não lidos', desc: `${100 - g.readRate}% dos comunicados não foram abertos nas últimas 4 semanas`, gain: '+12 pts', icon: '✉' });
+    list.push({ key: 'readRate', title: 'Enviar lembrete de comunicados não lidos', desc: `${100 - g.readRate}% dos comunicados não foram abertos nas últimas 4 semanas`, gain: '+12 pts', icon: '✉' });
   if (g.overdueStatus === 'atrasado')
-    list.push({ title: 'Abrir negociação financeira', desc: `${g.overdueDays} dias de atraso no pagamento atual`, gain: '+15 pts', icon: '$' });
+    list.push({ key: 'atrasado', title: 'Abrir negociação financeira', desc: `${g.overdueDays} dias de atraso no pagamento atual`, gain: '+15 pts', icon: '$' });
   if (g.overdueStatus === 'inadimplente')
-    list.push({ title: 'Acionar protocolo de inadimplência', desc: `${g.overdueDays} dias em aberto — fora do prazo de negociação simples`, gain: '+22 pts', icon: '!' });
+    list.push({ key: 'inadimplente', title: 'Acionar protocolo de inadimplência', desc: `${g.overdueDays} dias em aberto — fora do prazo de negociação simples`, gain: '+22 pts', icon: '!' });
   if (list.length === 0)
-    list.push({ title: 'Responsável em excelente situação', desc: 'Considere convidá-lo para o programa de embaixadores da escola', gain: '—', icon: '★' });
+    list.push({ key: 'excellent', title: 'Responsável em excelente situação', desc: 'Considere criar uma ação para deixá-lo ciente de que é um dos responsáveis mais engajados.', gain: '—', icon: '★' });
   return list;
+}
+
+function buildWhatsAppUrl(guardian, suggestions) {
+  const firstName = guardian.name.split(' ')[0];
+  const keys = new Set(suggestions.map(s => s.key));
+
+  let message = `Olá, ${firstName}! Tudo bem? 😊\n\nAqui é da equipe da escola, passando para dar um alô e ver como vocês estão.`;
+
+  if (keys.has('excellent')) {
+    message += `\n\nA gente queria aproveitar para te dar um retorno muito positivo: temos acompanhado seu envolvimento com a escola e você realmente se destaca. É muito bom ter responsáveis tão presentes! Por isso, gostaríamos de te convidar para fazer parte do nosso grupo de embaixadores — uma iniciativa para quem, assim como você, acredita na importância dessa parceria entre família e escola. Se quiser saber mais, é só falar com a gente! 🌟`;
+  } else {
+    const parts = [];
+
+    if (keys.has('engagement')) {
+      parts.push(`notamos que o app da escola não tem sido muito acessado ultimamente — ele tem alguns recursos bem úteis para acompanhar o dia a dia do seu filho(a) e a gente adoraria te apresentar melhor`);
+    }
+
+    if (keys.has('readRate')) {
+      parts.push(`tem alguns comunicados recentes que ainda não foram visualizados e gostaríamos de garantir que as informações importantes cheguem até você`);
+    }
+
+    if (keys.has('atrasado')) {
+      parts.push(`também identificamos um pequeno atraso no financeiro e queremos conversar com calma para encontrar juntos a melhor forma de resolver isso, sem nenhuma preocupação`);
+    }
+
+    if (keys.has('inadimplente')) {
+      parts.push(`vimos que há um pagamento em aberto que precisa de atenção e estamos aqui para ouvir você e buscar a solução que funcione melhor para o seu momento`);
+    }
+
+    if (parts.length === 1) {
+      message += `\n\n${parts[0].charAt(0).toUpperCase() + parts[0].slice(1)}. Quando tiver um tempinho, a gente pode conversar?`;
+    } else {
+      const last = parts.pop();
+      message += `\n\n${parts.map((p, i) => i === 0 ? p.charAt(0).toUpperCase() + p.slice(1) : p).join(', ')} e ${last}. Quando tiver um tempinho, a gente pode conversar?`;
+    }
+  }
+
+  message += `\n\nConta sempre com a gente! 💙\nEquipe Escolar`;
+
+  return `https://wa.me/5585982370209?text=${encodeURIComponent(message)}`;
 }
 
 export function GuardianDrawer({ guardian, avg, onClose }) {
@@ -146,8 +186,12 @@ export function GuardianDrawer({ guardian, avg, onClose }) {
             ))}
           </div>
           <div className="drawer__btn-row">
-            <button className="btn-primary">Enviar notificação</button>
-            <button className="btn-outline">Agendar contato</button>
+            <button
+              className="btn-primary w-100"
+              onClick={() => window.open(buildWhatsAppUrl(guardian, suggestions), '_blank')}
+            >
+              Entrar em contato
+            </button>
           </div>
         </div>
       </div>

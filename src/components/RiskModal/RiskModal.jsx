@@ -1,11 +1,21 @@
+import { useState } from 'react';
 import { RISK_THRESHOLD, getTier } from '../../data';
 import { TierBadge } from '../TierBadge/TierBadge';
+import { exportRiskToExcel } from '../../utils/exportRisk';
 import './styles.scss';
 
 export function RiskModal({ guardians, onClose, onSelectGuardian }) {
+  const [exporting, setExporting] = useState(false);
+
   const atRisk = [...guardians]
     .filter(g => g.score < RISK_THRESHOLD)
     .sort((a, b) => a.score - b.score);
+
+  function handleExport() {
+    setExporting(true);
+    exportRiskToExcel(guardians);
+    setExporting(false);
+  }
 
   return (
     <div className="risk-overlay" onClick={onClose}>
@@ -42,7 +52,7 @@ export function RiskModal({ guardians, onClose, onSelectGuardian }) {
               <div
                 key={g.id}
                 className="risk-item"
-                onClick={() => { onSelectGuardian(g); onClose(); }}
+                onClick={() => onSelectGuardian(g)}
               >
                 <div
                   className="risk-item__avatar"
@@ -74,8 +84,9 @@ export function RiskModal({ guardians, onClose, onSelectGuardian }) {
             Envie um plano de ação em massa ou exporte para a coordenação
           </div>
           <div className="risk-modal__footer-btns">
-            <button className="btn-secondary">Exportar CSV</button>
-            <button className="btn-primary-sm">Criar campanha</button>
+            <button className="btn-secondary" onClick={handleExport} disabled={exporting}>
+              {exporting ? 'Exportando…' : 'Exportar Excel'}
+            </button>
           </div>
         </div>
       </div>
