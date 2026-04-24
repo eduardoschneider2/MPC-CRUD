@@ -1,0 +1,28 @@
+.tier-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-family: var(--font-ui);
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+
+  &--md {
+    padding: 5px 12px;
+    font-size: 12px;
+    .tier-badge__icon { font-size: 10px; }
+  }
+
+  &--sm {
+    padding: 3px 8px;
+    font-size: 11px;
+    .tier-badge__icon { font-size: 8px; }
+  }
+
+  &--excelente { background: #d1fae5; color: #065f46; }
+  &--bom       { background: #f5e9fb; color: #8716bb; }
+  &--atencao   { background: #fffbeb; color: #92400e; }
+  &--ruim      { background: #fff7ed; color: #9a3412; }
+  &--critico   { background: #fee2e2; color: #b91c1c; }
+}

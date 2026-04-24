@@ -1,0 +1,369 @@
+/* ── overlay + drawer shell ─────────────────────────── */
+.drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(26, 22, 37, 0.4);
+  z-index: 40;
+  animation: fadeIn 0.2s ease;
+}
+
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 520px;
+  background: #fff;
+  z-index: 41;
+  overflow-y: auto;
+  box-shadow: -20px 0 40px rgba(26, 22, 37, 0.15);
+  animation: slideIn 0.25s cubic-bezier(0.22, 0.9, 0.3, 1);
+
+  /* ── header ─────────────────────────────────────────── */
+  &__header {
+    padding: 20px 24px;
+    border-bottom: 1px solid #ece6f4;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__header-label {
+    font-size: 12px;
+    color: #8a83a0;
+    font-family: var(--font-mono);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  &__close {
+    background: none;
+    border: none;
+    font-size: 22px;
+    color: #6b6477;
+    cursor: pointer;
+    padding: 4px;
+    line-height: 1;
+  }
+
+  /* ── identity ───────────────────────────────────────── */
+  &__identity {
+    padding: 24px 24px 0;
+  }
+
+  &__identity-inner {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  &__avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 700;
+    font-family: var(--font-ui);
+    /* background is dynamic — set via style prop */
+  }
+
+  &__name-block {
+    min-width: 0;
+    flex: 1;
+  }
+
+  &__name {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1a1625;
+    font-family: var(--font-ui);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__id {
+    font-size: 12px;
+    color: #8a83a0;
+    font-family: var(--font-mono);
+    margin-top: 3px;
+    letter-spacing: 0.3px;
+  }
+
+  /* ── gauge section ──────────────────────────────────── */
+  &__gauge-section {
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  &__gauge-wrap {
+    flex: 1;
+    max-width: 280px;
+  }
+
+  &__stats { flex: 1; }
+
+  &__stat-label {
+    font-size: 11px;
+    color: #8a83a0;
+    font-family: var(--font-mono);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  &__stat-vs { margin-top: 16px; }
+
+  &__delta {
+    font-size: 22px;
+    font-weight: 700;
+    font-family: var(--font-display);
+    letter-spacing: -0.5px;
+    margin-top: 2px;
+    /* color is dynamic — set via style prop */
+  }
+
+  &__avg {
+    font-size: 11px;
+    color: #8a83a0;
+    font-family: var(--font-ui);
+    margin-top: 2px;
+  }
+
+  &__next-tier { margin-top: 14px; }
+
+  &__next-tier-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1a1625;
+    font-family: var(--font-ui);
+    margin-top: 2px;
+  }
+
+  /* ── composition ────────────────────────────────────── */
+  &__composition { padding: 0 24px; }
+
+  &__section-title {
+    font-size: 11px;
+    color: #8a83a0;
+    font-family: var(--font-mono);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  &__composition-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+  }
+
+  /* ── actions ────────────────────────────────────────── */
+  &__actions { padding: 24px; }
+
+  &__suggestions-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__btn-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+  }
+}
+
+/* ── metric cell ────────────────────────────────────── */
+.metric-cell {
+  padding: 12px 14px;
+  background: #faf7fc;
+  border: 1px solid #ece6f4;
+  border-radius: 10px;
+
+  &__label {
+    font-size: 11px;
+    color: #8a83a0;
+    font-family: var(--font-ui);
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  &__value-row {
+    display: flex;
+    align-items: baseline;
+    gap: 3px;
+    margin-top: 6px;
+  }
+
+  &__value {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1a1625;
+    font-family: var(--font-display);
+    letter-spacing: -0.5px;
+  }
+
+  &__unit {
+    font-size: 11px;
+    color: #8a83a0;
+    font-family: var(--font-mono);
+  }
+
+  &__bar-track {
+    height: 4px;
+    background: #ece6f4;
+    border-radius: 2px;
+    margin-top: 8px;
+    overflow: hidden;
+  }
+
+  &__bar-fill {
+    height: 100%;
+    background: #8600c2;
+    border-radius: 2px;
+    /* width is dynamic — set via style prop */
+  }
+}
+
+/* ── financial cell ─────────────────────────────────── */
+.financial-cell {
+  padding: 12px 14px;
+  border-radius: 10px;
+  min-width: 0;
+  /* background and border are dynamic — set via style prop */
+
+  &__label {
+    font-size: 11px;
+    color: #8a83a0;
+    font-family: var(--font-ui);
+    font-weight: 500;
+  }
+
+  &__status-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 8px;
+    flex-wrap: nowrap;
+  }
+
+  &__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    /* background is dynamic — set via style prop */
+  }
+
+  &__status-text {
+    font-size: 14px;
+    font-weight: 600;
+    font-family: var(--font-ui);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* color is dynamic — set via style prop */
+  }
+
+  &__sub {
+    font-size: 11px;
+    font-family: var(--font-mono);
+    margin-top: 6px;
+    opacity: 0.75;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* color is dynamic — set via style prop */
+  }
+}
+
+/* ── suggestion card ────────────────────────────────── */
+.suggestion {
+  display: flex;
+  gap: 12px;
+  padding: 14px 16px;
+  background: #faf7fc;
+  border-radius: 10px;
+  border: 1px solid #ece6f4;
+
+  &__icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    background: #fff;
+    border: 1px solid #ece6f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #8600c2;
+    font-size: 16px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  &__content { flex: 1; }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+  }
+
+  &__title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1a1625;
+    font-family: var(--font-ui);
+  }
+
+  &__gain {
+    font-size: 11px;
+    font-weight: 700;
+    color: #047857;
+    font-family: var(--font-mono);
+    white-space: nowrap;
+  }
+
+  &__desc {
+    font-size: 12px;
+    color: #6b6477;
+    font-family: var(--font-ui);
+    margin-top: 3px;
+    line-height: 1.4;
+  }
+}
+
+/* ── shared buttons ─────────────────────────────────── */
+.btn-primary {
+  flex: 1;
+  padding: 10px 16px;
+  background: #8600c2;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--font-ui);
+  cursor: pointer;
+}
+
+.btn-outline {
+  flex: 1;
+  padding: 10px 16px;
+  background: #fff;
+  color: #8600c2;
+  border: 1px solid #8600c2;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--font-ui);
+  cursor: pointer;
+}

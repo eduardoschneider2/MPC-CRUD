@@ -1,0 +1,9 @@
+.score-gauge {
+  display: block;
+  overflow: visible;
+}
+
+.score-gauge__needle {
+  /* transform and transform-origin are dynamic — set via style prop */
+  transition: transform 0.7s cubic-bezier(0.22, 0.9, 0.3, 1);
+}

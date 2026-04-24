@@ -1,0 +1,12 @@
+.trend {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+
+  &--pos { color: #047857; }
+  &--neg { color: #b91c1c; }
+  &--neu { color: #8a83a0; }
+}

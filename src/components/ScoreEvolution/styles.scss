@@ -1,0 +1,133 @@
+.score-evo {
+  background: #fff;
+  border: 1px solid #ece6f4;
+  border-radius: 12px;
+  padding: 22px 24px;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 28px;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 4px;
+  }
+
+  &__title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #1a1625;
+    font-family: var(--font-ui);
+  }
+
+  &__period {
+    font-size: 11px;
+    color: #8a83a0;
+    font-family: var(--font-mono);
+    letter-spacing: 0.5px;
+  }
+
+  &__avg-row {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  &__avg-value {
+    font-size: 32px;
+    font-weight: 900;
+    color: #1a1625;
+    font-family: var(--font-display);
+    letter-spacing: -1px;
+  }
+
+  &__avg-delta {
+    font-size: 13px;
+    font-weight: 600;
+    font-family: var(--font-mono);
+
+    &--pos { color: #047857; }
+    &--neg { color: #b91c1c; }
+  }
+
+  &__chart {
+    display: block;
+    overflow: visible;
+  }
+
+  &__right {
+    border-left: 1px solid #f1ecf7;
+    padding-left: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+}
+
+.movers {
+  &__title {
+    font-size: 11px;
+    color: #8a83a0;
+    font-family: var(--font-mono);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  &__avatar {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    flex-shrink: 0;
+    /* background is dynamic — set via style prop */
+  }
+
+  &__info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__name {
+    font-size: 12px;
+    font-weight: 500;
+    color: #1a1625;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__pts {
+    font-size: 10px;
+    color: #8a83a0;
+    font-family: var(--font-mono);
+  }
+
+  &__trend {
+    font-size: 12px;
+    font-weight: 700;
+    font-family: var(--font-mono);
+
+    &--pos { color: #047857; }
+    &--neg { color: #b91c1c; }
+  }
+}

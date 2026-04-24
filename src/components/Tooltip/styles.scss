@@ -1,0 +1,53 @@
+.tooltip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+
+  &__btn {
+    margin-left: 5px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 1px solid currentColor;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    font-weight: 700;
+    font-family: var(--font-ui);
+    cursor: help;
+    opacity: 0.55;
+    flex-shrink: 0;
+    outline: none;
+  }
+
+  &__popover {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1a1625;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 400;
+    font-family: var(--font-ui);
+    padding: 9px 12px;
+    border-radius: 6px;
+    line-height: 1.45;
+    box-shadow: 0 8px 24px rgba(26, 22, 37, 0.25);
+    z-index: 100;
+    text-transform: none;
+    letter-spacing: 0.1px;
+    pointer-events: none;
+    /* top/bottom and width are dynamic — set via style prop */
+  }
+
+  &__arrow {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    width: 8px;
+    height: 8px;
+    background: #1a1625;
+    /* top/bottom is dynamic — set via style prop */
+  }
+}

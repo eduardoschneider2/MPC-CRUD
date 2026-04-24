@@ -1,0 +1,33 @@
+.mini-score-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  &__value {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 18px;
+    color: #1a1625;
+    min-width: 32px;
+    letter-spacing: -0.5px;
+  }
+
+  &__track {
+    position: relative;
+    flex: 1;
+    height: 6px;
+    background: #f1ecf7;
+    border-radius: 3px;
+    overflow: hidden;
+    max-width: 120px;
+  }
+
+  &__fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    border-radius: 3px;
+    /* width and background are dynamic — set via style prop */
+  }
+}

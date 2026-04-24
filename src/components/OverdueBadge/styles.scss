@@ -1,0 +1,36 @@
+.overdue-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: var(--font-ui);
+  white-space: nowrap;
+
+  &__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  &--em_dia {
+    background: #ecfdf5;
+    color: #047857;
+    .overdue-badge__dot { background: #10b981; }
+  }
+
+  &--atrasado {
+    background: #fffbeb;
+    color: #b45309;
+    .overdue-badge__dot { background: #f59e0b; }
+  }
+
+  &--inadimplente {
+    background: #fef2f2;
+    color: #b91c1c;
+    .overdue-badge__dot { background: #dc2626; }
+  }
+}

@@ -1,0 +1,165 @@
+.guardians-table {
+  background: #fff;
+  border: 1px solid #ece6f4;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* ── filter bar ─────────────────────────────────────── */
+.gt-filters {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  border-bottom: 1px solid #ece6f4;
+}
+
+.gt-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a1625;
+  font-family: var(--font-ui);
+}
+
+.gt-count {
+  font-size: 12px;
+  color: #8a83a0;
+  font-family: var(--font-mono);
+}
+
+.gt-spacer { flex: 1; }
+
+.gt-search {
+  position: relative;
+
+  &__input {
+    border: 1px solid #ece6f4;
+    border-radius: 8px;
+    padding: 8px 12px 8px 32px;
+    font-size: 13px;
+    font-family: var(--font-ui);
+    width: 260px;
+    outline: none;
+    background: #faf7fc;
+
+    &:focus { border-color: #8600c2; }
+  }
+
+  &__icon {
+    position: absolute;
+    left: 11px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #8a83a0;
+    font-size: 13px;
+    pointer-events: none;
+  }
+}
+
+.gt-select {
+  border: 1px solid #ece6f4;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-family: var(--font-ui);
+  background: #faf7fc;
+  outline: none;
+  color: var(--fg);
+}
+
+/* ── table ──────────────────────────────────────────── */
+.gt-body {
+  max-height: 560px;
+  overflow-y: auto;
+}
+
+.gt-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.gt-thead {
+  background: #faf7fc;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.gt-th {
+  text-align: left;
+  padding: 12px 14px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #6b6477;
+  font-family: var(--font-ui);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  border-bottom: 1px solid #ece6f4;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+
+  &--plain  { cursor: default; }
+  &--right  { text-align: right; }
+  &--empty  { width: 28px; }
+}
+
+.gt-sort-icon {
+  margin-left: 4px;
+  color: #8600c2;
+}
+
+.gt-row {
+  cursor: pointer;
+  transition: background 0.1s;
+
+  &:hover { background: #faf7fc; }
+}
+
+.gt-td {
+  padding: 14px 14px;
+  border-bottom: 1px solid #f5f0fa;
+
+  &--right  { text-align: right; }
+  &--mono   { font-family: var(--font-mono); font-size: 13px; color: #1a1625; }
+  &--muted  { color: #8a83a0; }
+}
+
+/* ── guardian cell ──────────────────────────────────── */
+.gt-guardian {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.gt-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: var(--font-ui);
+  flex-shrink: 0;
+  /* background is dynamic — set via style prop */
+}
+
+.gt-guardian-info { min-width: 0; }
+
+.gt-guardian-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1a1625;
+  font-family: var(--font-ui);
+}
+
+.gt-guardian-id {
+  font-size: 11px;
+  color: #8a83a0;
+  font-family: var(--font-mono);
+  margin-top: 3px;
+  letter-spacing: 0.3px;
+}
